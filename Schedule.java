@@ -25,7 +25,7 @@ public class Schedule{
 
 		procUsed = 0;
 		currentTime = 0;
-		OPEN = new Node();
+		OPEN = new Node(-9999, -9999, null);
 	}
 
 	public void loadMatrix(FileInputStream inFile){
@@ -44,12 +44,12 @@ public class Schedule{
 	}
 
 	public int findOrphan(){return 0;}
-	public void openInsert(){}
-	public void printOPEN(){}
+	public void openInsert(Node newNode){}
+	public void printOPEN(FileOutputStream outFile){}
 	public int getNextProc(){return 0;}
-	public void putJobOnTable(){}
-	public void printTable(){}
+	public void putJobOnTable(int availableProc, int currentTime, int jobID, int jobTitle){}
+	public void printTable(FileOutputStream outFile){}
 	public boolean checkCycle(){return false;}
 	public boolean isGraphEmpty(){return false;}
-	public void deleteJob(){}
+	public void deleteJob(int jobID){}
 }
