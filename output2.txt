@@ -1,0 +1,106 @@
+PRINTING ADJMATRIX 
+8 0 0 0 0 0 0 0 0 
+0 1 0 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 
+0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 1 0 0 0 
+0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 0 1 0 
+0 0 0 0 0 0 0 0 1 
+PRINTING OPEN 
+(JobID: -9999 JobTime: -9999 Next JobID: 1)--->(JobID: 1 JobTime: 1 Next JobID: NULL) 
+PRINTING OPEN 
+(JobID: -9999 JobTime: -9999 Next JobID: 1)--->(JobID: 1 JobTime: 1 Next JobID: 2)--->(JobID: 2 JobTime: 1 Next JobID: NULL) 
+PRINTING OPEN 
+(JobID: -9999 JobTime: -9999 Next JobID: 1)--->(JobID: 1 JobTime: 1 Next JobID: 2)--->(JobID: 2 JobTime: 1 Next JobID: 3)--->(JobID: 3 JobTime: 1 Next JobID: NULL) 
+PRINTING OPEN 
+(JobID: -9999 JobTime: -9999 Next JobID: 1)--->(JobID: 1 JobTime: 1 Next JobID: 2)--->(JobID: 2 JobTime: 1 Next JobID: 3)--->(JobID: 3 JobTime: 1 Next JobID: 4)--->(JobID: 4 JobTime: 1 Next JobID: NULL) 
+PRINTING OPEN 
+(JobID: -9999 JobTime: -9999 Next JobID: 1)--->(JobID: 1 JobTime: 1 Next JobID: 2)--->(JobID: 2 JobTime: 1 Next JobID: 3)--->(JobID: 3 JobTime: 1 Next JobID: 4)--->(JobID: 4 JobTime: 1 Next JobID: 5)--->(JobID: 5 JobTime: 1 Next JobID: NULL) 
+PRINTING OPEN 
+(JobID: -9999 JobTime: -9999 Next JobID: 1)--->(JobID: 1 JobTime: 1 Next JobID: 2)--->(JobID: 2 JobTime: 1 Next JobID: 3)--->(JobID: 3 JobTime: 1 Next JobID: 4)--->(JobID: 4 JobTime: 1 Next JobID: 5)--->(JobID: 5 JobTime: 1 Next JobID: 6)--->(JobID: 6 JobTime: 1 Next JobID: NULL) 
+PRINTING OPEN 
+(JobID: -9999 JobTime: -9999 Next JobID: 1)--->(JobID: 1 JobTime: 1 Next JobID: 2)--->(JobID: 2 JobTime: 1 Next JobID: 3)--->(JobID: 3 JobTime: 1 Next JobID: 4)--->(JobID: 4 JobTime: 1 Next JobID: 5)--->(JobID: 5 JobTime: 1 Next JobID: 6)--->(JobID: 6 JobTime: 1 Next JobID: 7)--->(JobID: 7 JobTime: 1 Next JobID: NULL) 
+PRINTING OPEN 
+(JobID: -9999 JobTime: -9999 Next JobID: 1)--->(JobID: 1 JobTime: 1 Next JobID: 2)--->(JobID: 2 JobTime: 1 Next JobID: 3)--->(JobID: 3 JobTime: 1 Next JobID: 4)--->(JobID: 4 JobTime: 1 Next JobID: 5)--->(JobID: 5 JobTime: 1 Next JobID: 6)--->(JobID: 6 JobTime: 1 Next JobID: 7)--->(JobID: 7 JobTime: 1 Next JobID: 8)--->(JobID: 8 JobTime: 1 Next JobID: NULL) 
+PRINTING ADJMATRIX 
+8 0 0 0 0 0 0 0 0 
+0 2 0 0 0 0 0 0 0 
+0 0 2 0 0 0 0 0 0 
+0 0 0 2 0 0 0 0 0 
+0 0 0 0 2 0 0 0 0 
+0 0 0 0 0 2 0 0 0 
+0 0 0 0 0 0 2 0 0 
+0 0 0 0 0 0 0 2 0 
+0 0 0 0 0 0 0 0 2 
+PRINTING ADJMATRIX 
+8 0 0 0 0 0 0 0 0 
+0 2 0 0 0 0 0 0 0 
+0 0 2 0 0 0 0 0 0 
+0 0 0 2 0 0 0 0 0 
+0 0 0 0 2 0 0 0 0 
+0 0 0 0 0 2 0 0 0 
+0 0 0 0 0 0 2 0 0 
+0 0 0 0 0 0 0 2 0 
+0 0 0 0 0 0 0 0 2 
+PRINTING ADJMATRIX 
+8 0 0 0 0 0 0 0 0 
+0 2 0 0 0 0 0 0 0 
+0 0 2 0 0 0 0 0 0 
+0 0 0 2 0 0 0 0 0 
+0 0 0 0 2 0 0 0 0 
+0 0 0 0 0 2 0 0 0 
+0 0 0 0 0 0 2 0 0 
+0 0 0 0 0 0 0 2 0 
+0 0 0 0 0 0 0 0 2 
+PRINTING ADJMATRIX 
+8 0 0 0 0 0 0 0 0 
+0 2 0 0 0 0 0 0 0 
+0 0 2 0 0 0 0 0 0 
+0 0 0 2 0 0 0 0 0 
+0 0 0 0 2 0 0 0 0 
+0 0 0 0 0 2 0 0 0 
+0 0 0 0 0 0 2 0 0 
+0 0 0 0 0 0 0 2 0 
+0 0 0 0 0 0 0 0 2 
+PRINTING ADJMATRIX 
+8 0 0 0 0 0 0 0 0 
+0 2 0 0 0 0 0 0 0 
+0 0 2 0 0 0 0 0 0 
+0 0 0 2 0 0 0 0 0 
+0 0 0 0 2 0 0 0 0 
+0 0 0 0 0 2 0 0 0 
+0 0 0 0 0 0 2 0 0 
+0 0 0 0 0 0 0 2 0 
+0 0 0 0 0 0 0 0 2 
+PRINTING ADJMATRIX 
+8 0 0 0 0 0 0 0 0 
+0 2 0 0 0 0 0 0 0 
+0 0 2 0 0 0 0 0 0 
+0 0 0 2 0 0 0 0 0 
+0 0 0 0 2 0 0 0 0 
+0 0 0 0 0 2 0 0 0 
+0 0 0 0 0 0 2 0 0 
+0 0 0 0 0 0 0 2 0 
+0 0 0 0 0 0 0 0 2 
+PRINTING ADJMATRIX 
+8 0 0 0 0 0 0 0 0 
+0 2 0 0 0 0 0 0 0 
+0 0 2 0 0 0 0 0 0 
+0 0 0 2 0 0 0 0 0 
+0 0 0 0 2 0 0 0 0 
+0 0 0 0 0 2 0 0 0 
+0 0 0 0 0 0 2 0 0 
+0 0 0 0 0 0 0 2 0 
+0 0 0 0 0 0 0 0 2 
+PRINTING ADJMATRIX 
+8 0 0 0 0 0 0 0 0 
+0 2 0 0 0 0 0 0 0 
+0 0 2 0 0 0 0 0 0 
+0 0 0 2 0 0 0 0 0 
+0 0 0 0 2 0 0 0 0 
+0 0 0 0 0 2 0 0 0 
+0 0 0 0 0 0 2 0 0 
+0 0 0 0 0 0 0 2 0 
+0 0 0 0 0 0 0 0 2 

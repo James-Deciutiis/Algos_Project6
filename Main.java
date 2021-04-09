@@ -17,8 +17,10 @@ public class Main{
 			Scanner inputOneScanner = new Scanner(inFileOne);
 			int numNodes = Integer.parseInt(inputOneScanner.nextLine());
 			Schedule schedule = new Schedule(numNodes);
+			
 
 			int numProcs = Integer.parseInt(args[2]);
+
 			if(numProcs <= 0){
 				System.out.println("Need one or more processors! Check inputs!");
 				return;
@@ -41,10 +43,11 @@ public class Main{
 
 			while(!schedule.isGraphEmpty()){
 				int jobID = schedule.findOrphan();
-				while(jobID == -9999){
-					if(schedule.OPEN.jobID > 0){
+				while(jobID != -1){
+					if(jobID > 0){
 						Node newNode = new Node(jobID, schedule.jobTimeAry[jobID], null);
 						schedule.openInsert(newNode);
+						System.out.println("AHHHHHHHHHHH");
 						schedule.printOPEN(outFileTwo);
 					}
 				
@@ -53,11 +56,11 @@ public class Main{
 
 			
 				int availableProc = schedule.getNextProc();
-				while(availableProc > 0 && schedule.OPEN.next != null && schedule.procUsed < schedule.numProcs){
+				while(availableProc >= 0 && schedule.OPEN.next != null && schedule.procUsed < schedule.numProcs){
 					schedule.numProcs++;
 					Node newJob = schedule.OPEN.next;
 					schedule.OPEN.next = null;
-					schedule.putJobOnTable(availableProc, schedule.currentTime, newJob.jobID, newJob.jobTitle);
+					schedule.putJobOnTable(availableProc, newJob.jobID, newJob.jobTime);
 				}
 
 				schedule.printTable(outFileOne);
