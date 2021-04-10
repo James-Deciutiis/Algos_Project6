@@ -19,20 +19,31 @@ public class Schedule{
 		table = new int[numNodes+1][numNodes+1];
 
 		for(int i = 0; i < numNodes+1; i++){
-			jobTimeAry[i] = 0;
+			this.jobTimeAry[i] = 0;
 			for(int j = 0; j < numNodes+1; j++){
-				adjMatrix[i][j] = 0;
-				table[i][j] = 0;
+				if(i == 0 && j != 0){
+					this.adjMatrix[i][j] = j;
+				}
+				else if(j == 0 && i != 0){
+					this.adjMatrix[i][j] = i;
+				}
+				else{
+					this.adjMatrix[i][j] = 0;
+				}
+
+				this.table[i][j] = 0;
 			}
 		}
 
-		procUsed = 0;
-		currentTime = 0;
-		OPEN = new Node(-9999, -9999, null);
+		
+		this.procUsed = 0;
+		this.currentTime = 0;
+		this.OPEN = new Node(-9999, -9999, null);
 	}
 
 	public void loadMatrix(FileInputStream inFile){
 		Scanner scanner = new Scanner(inFile); 
+		scanner.nextLine();
 		while(scanner.hasNextLine()){
 			String line = scanner.nextLine();
 			String row = "";
@@ -51,6 +62,7 @@ public class Schedule{
 				}
 			}
 			
+			System.out.println(row + " : " + col);
 			this.adjMatrix[Integer.parseInt(row)][Integer.parseInt(col)] = 1;
 			row = "";
 			col = "";
@@ -112,11 +124,19 @@ public class Schedule{
 	}
 
 	public int findOrphan(){
-		for(int i = 0; i < this.numNodes+1; i++){
-			if(this.adjMatrix[0][i] == 0 && this.adjMatrix[i][i] == 1){
+		boolean isOrphan = true;
+		for(int i = 1; i < this.numNodes+1; i++){
+			for(int j = 1; j < this.numNodes+1; j++){
+				if(this.adjMatrix[j][i] != 0 && j!=i){
+					isOrphan = false;
+				}
+			}
+			if(isOrphan && this.adjMatrix[i][i] == 1){	
 				this.adjMatrix[i][i] = 2;
 				return i;
 			}
+			
+			isOrphan = true;
 		}
 
 		return -1;
@@ -124,17 +144,11 @@ public class Schedule{
 
 	public void openInsert(Node newNode){
 		Node head = this.OPEN;
-		while(head.next != null && head.jobID < newNode.jobID){
+		while(head.next != null && head.next.jobID < newNode.jobID){
 			head = head.next;
 		}
 	
-		if(head.jobID == this.OPEN.jobID){
-			newNode.next = null;
-		}
-		else{
-			newNode.next = head.next;
-		}
-
+		newNode.next = head.next;
 		head.next = newNode;
 	}
 
@@ -156,7 +170,8 @@ public class Schedule{
 	}
 
 	public int getNextProc(){
-		for(int i = 0; i < this.numNodes+1; i++){
+		for(int i = 0; i < this.numProcs; i++){
+			System.out.println(this.currentTime);
 			if(this.table[i][this.currentTime] == 0){
 				return i;
 			}
@@ -169,8 +184,10 @@ public class Schedule{
 		int time = this.currentTime;
 		int endTime = time + jobTime;
 		
+		System.out.println("avail proc: " + availableProc + " jobID: " + jobID + " jobtime: " + jobTime);
 		while(time < endTime){
 			this.table[availableProc][time] = jobID;
+			time++;
 		}
 	}
 
@@ -179,7 +196,7 @@ public class Schedule{
 			outFile.write(("PRINTING TABLE \n").getBytes());
 			String cols = "       ";
 			String border = "\n";
-			for(int i = 0; i < this.numNodes + 1; i++){
+			for(int i = 0; i < this.numNodes; i++){
 				cols += (i + "   ");
 				border += "-----";
 			}
@@ -189,10 +206,10 @@ public class Schedule{
 			outFile.write((border).getBytes());
 
 			String row = "";
-			for(int i = 0; i < this.numNodes + 1; i++){
+			for(int i = 0; i < this.numProcs; i++){
 				outFile.write(("P(" + i + ") | ").getBytes());
-				for(int j = 1; j < this.numNodes + 1; j++){
-					row += table[i][j] + " | ";
+				for(int j = 0; j < this.numNodes; j++){
+					row += this.table[i][j] + " | ";
 				}
 
 				outFile.write((row + border).getBytes());
@@ -208,7 +225,7 @@ public class Schedule{
 		boolean open_empty = this.OPEN.next == null;
 		boolean graph_empty = this.isGraphEmpty();
 		boolean all_proc_avail = this.procUsed == 0;
-		System.out.println(open_empty + " : " + graph_empty + " : " + all_proc_avail);
+
 		return open_empty && !graph_empty && all_proc_avail;
 	}
 
@@ -222,10 +239,11 @@ public class Schedule{
 		int j = 1;
 		
 		while(j <= this.numNodes){
-			if(this.adjMatrix[jobID][j] > 0){
-				this.adjMatrix[0][j]--;
-				j++;
+			if(this.adjMatrix[jobID][j] > 0 && j != jobID){
+				this.adjMatrix[jobID][j]--;
 			}
+			
+			j++;
 		}
 	}
 }

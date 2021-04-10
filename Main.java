@@ -10,16 +10,18 @@ public class Main{
 			}
 
 			FileInputStream inFileOne = new FileInputStream(args[0]);
+			FileInputStream tmp = new FileInputStream(args[0]);
 			FileInputStream inFileTwo = new FileInputStream(args[1]);
 			FileOutputStream outFileOne = new FileOutputStream(args[3]);
 			FileOutputStream outFileTwo = new FileOutputStream(args[4]);
 			
-			Scanner inputOneScanner = new Scanner(inFileOne);
-			int numNodes = Integer.parseInt(inputOneScanner.nextLine());
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(tmp));
+			int numNodes = Integer.parseInt(br.readLine());
 			Schedule schedule = new Schedule(numNodes);
-			
 
 			int numProcs = Integer.parseInt(args[2]);
+
 
 			if(numProcs <= 0){
 				System.out.println("Need one or more processors! Check inputs!");
@@ -30,6 +32,7 @@ public class Main{
 			}
 	
 			schedule.loadMatrix(inFileOne);
+			schedule.numProcs = numProcs;
 			schedule.totalJobTime = schedule.loadJobTimeAry(inFileTwo);
 
 			for(int i = 0; i < schedule.numProcs; i++){
@@ -43,24 +46,26 @@ public class Main{
 
 			while(!schedule.isGraphEmpty()){
 				int jobID = schedule.findOrphan();
-				while(jobID != -1){
-					if(jobID > 0){
-						Node newNode = new Node(jobID, schedule.jobTimeAry[jobID], null);
-						schedule.openInsert(newNode);
-						System.out.println("AHHHHHHHHHHH");
-						schedule.printOPEN(outFileTwo);
-					}
-				
+				while(jobID > 0){
+					Node newNode = new Node(jobID, schedule.jobTimeAry[jobID], null);
+					schedule.openInsert(newNode);
+					schedule.printOPEN(outFileTwo);
+					
 					jobID = schedule.findOrphan();
 				}
 
 			
 				int availableProc = schedule.getNextProc();
 				while(availableProc >= 0 && schedule.OPEN.next != null && schedule.procUsed < schedule.numProcs){
-					schedule.numProcs++;
 					Node newJob = schedule.OPEN.next;
-					schedule.OPEN.next = null;
+					schedule.OPEN.next = schedule.OPEN.next.next;
+
 					schedule.putJobOnTable(availableProc, newJob.jobID, newJob.jobTime);
+					if(availableProc > schedule.procUsed){
+						schedule.procUsed++;
+					}
+
+					availableProc = schedule.getNextProc();
 				}
 
 				schedule.printTable(outFileOne);
