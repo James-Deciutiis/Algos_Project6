@@ -14,14 +14,11 @@ public class Main{
 			FileInputStream inFileTwo = new FileInputStream(args[1]);
 			FileOutputStream outFileOne = new FileOutputStream(args[3]);
 			FileOutputStream outFileTwo = new FileOutputStream(args[4]);
-			
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(tmp));
 			int numNodes = Integer.parseInt(br.readLine());
 			Schedule schedule = new Schedule(numNodes);
-
 			int numProcs = Integer.parseInt(args[2]);
-
 
 			if(numProcs <= 0){
 				System.out.println("Need one or more processors! Check inputs!");
@@ -34,7 +31,8 @@ public class Main{
 			schedule.loadMatrix(inFileOne);
 			schedule.numProcs = numProcs;
 			schedule.totalJobTime = schedule.loadJobTimeAry(inFileTwo);
-
+			
+			schedule.table = new int[numNodes+1][schedule.totalJobTime+1];
 			for(int i = 0; i < schedule.numProcs; i++){
 				for(int j = 0; j < schedule.totalJobTime; j++){
 					schedule.table[i][j] = 0;
@@ -43,7 +41,6 @@ public class Main{
 
 			schedule.setMatrix();
 			schedule.printMatrix(outFileTwo);
-
 			while(!schedule.isGraphEmpty()){
 				int jobID = schedule.findOrphan();
 				while(jobID > 0){
@@ -59,7 +56,6 @@ public class Main{
 				while(availableProc >= 0 && schedule.OPEN.next != null && schedule.procUsed < schedule.numProcs){
 					Node newJob = schedule.OPEN.next;
 					schedule.OPEN.next = schedule.OPEN.next.next;
-
 					schedule.putJobOnTable(availableProc, newJob.jobID, newJob.jobTime);
 					if(availableProc > schedule.procUsed){
 						schedule.procUsed++;

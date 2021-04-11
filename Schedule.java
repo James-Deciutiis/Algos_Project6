@@ -16,7 +16,6 @@ public class Schedule{
 		numNodes = _numNodes;
 		jobTimeAry = new int [numNodes+1];
 		adjMatrix = new int[numNodes+1][numNodes+1];
-		table = new int[numNodes+1][numNodes+1];
 
 		for(int i = 0; i < numNodes+1; i++){
 			this.jobTimeAry[i] = 0;
@@ -30,8 +29,6 @@ public class Schedule{
 				else{
 					this.adjMatrix[i][j] = 0;
 				}
-
-				this.table[i][j] = 0;
 			}
 		}
 
@@ -53,19 +50,17 @@ public class Schedule{
 				if(line.charAt(i) != ' '){
 					if(row_or_col % 2 == 0){
 						row += line.charAt(i);
-						row_or_col++;
 					}
 					else{
 						col += line.charAt(i);
-						row_or_col++;
 					}
 				}
+				else{
+					row_or_col++;
+				}
 			}
-			
-			System.out.println(row + " : " + col);
+
 			this.adjMatrix[Integer.parseInt(row)][Integer.parseInt(col)] = 1;
-			row = "";
-			col = "";
 		}
 	}
 
@@ -82,19 +77,18 @@ public class Schedule{
 				if(line.charAt(i) != ' '){
 					if(row_or_col % 2 == 0){
 						row += line.charAt(i);
-						row_or_col++;
 					}
 					else{
 						time += line.charAt(i);
-						row_or_col++;
 					}
+				}
+				else{
+					row_or_col++;
 				}
 			}
 			
 			this.jobTimeAry[Integer.parseInt(row)] = Integer.parseInt(time);
 			retval += Integer.parseInt(time);
-			row = "";
-			time = "";
 		}
 				
 		return retval;
@@ -113,7 +107,11 @@ public class Schedule{
 			outFile.write(("PRINTING ADJMATRIX \n").getBytes());
 			for(int i = 0; i < this.numNodes+1; i++){
 				for(int j = 0; j < this.numNodes+1; j++){
-					outFile.write((this.adjMatrix[i][j] + " ").getBytes());
+					String entry = this.adjMatrix[i][j] + "";
+					while(entry.length() != 4){
+						entry+= " ";
+					}
+					outFile.write(entry.getBytes());
 				}
 				
 				outFile.write(("\n").getBytes());
@@ -171,7 +169,6 @@ public class Schedule{
 
 	public int getNextProc(){
 		for(int i = 0; i < this.numProcs; i++){
-			System.out.println(this.currentTime);
 			if(this.table[i][this.currentTime] == 0){
 				return i;
 			}
@@ -184,7 +181,6 @@ public class Schedule{
 		int time = this.currentTime;
 		int endTime = time + jobTime;
 		
-		System.out.println("avail proc: " + availableProc + " jobID: " + jobID + " jobtime: " + jobTime);
 		while(time < endTime){
 			this.table[availableProc][time] = jobID;
 			time++;
@@ -193,12 +189,17 @@ public class Schedule{
 
 	public void printTable(FileOutputStream outFile){
 		try{
-			outFile.write(("PRINTING TABLE \n").getBytes());
+			outFile.write(("PRINTING TABLE, CURRENT TIME IS: " + this.currentTime + "\n").getBytes());
 			String cols = "       ";
 			String border = "\n";
-			for(int i = 0; i < this.numNodes; i++){
-				cols += (i + "   ");
-				border += "-----";
+			for(int i = 0; i < this.totalJobTime; i++){
+				String entry = "" + i;
+				while(entry.length() != 4){
+					entry+=" ";
+				}
+
+				cols += (entry + " | ");
+				border += "---------";
 			}
 			border+="\n";
 	
@@ -208,8 +209,13 @@ public class Schedule{
 			String row = "";
 			for(int i = 0; i < this.numProcs; i++){
 				outFile.write(("P(" + i + ") | ").getBytes());
-				for(int j = 0; j < this.numNodes; j++){
-					row += this.table[i][j] + " | ";
+				for(int j = 0; j < this.totalJobTime; j++){
+					String entry = "" + this.table[i][j];
+					while(entry.length() != 4){
+						entry+=" ";
+					}
+
+					row += entry + " | ";
 				}
 
 				outFile.write((row + border).getBytes());
